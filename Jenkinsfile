@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'username/repository'  // Replace with your Docker Hub repository
+        DOCKER_IMAGE = 'abdallah1312/test'  // Your Docker Hub repository
         DOCKER_TAG = 'latest'
-        K8S_DEPLOYMENT_FILE = 'k8s/deployment.yaml'  // Path to your Kubernetes deployment YAML file
+        K8S_DEPLOYMENT_FILE = 'k8s/deployment.yaml'  // Path to Kubernetes deployment YAML file
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/username/repository.git'  // Replace with your repository URL
+                git 'https://github.com/AbdallahHesham44/public-repo.git'  // Repository URL
             }
         }
         stage('Build Docker Image') {
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Use withCredentials to securely access Docker Hub credentials
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         // Log in to Docker Hub using the credentials
                         sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin"
 
@@ -36,7 +36,7 @@ pipeline {
         stage('Update Kubernetes Deployment YAML') {
             steps {
                 script {
-                    // Use `sed` to update the image name and tag in the Kubernetes deployment YAML file
+                    // Update the image name and tag in the Kubernetes deployment YAML file
                     sh """
                     sed -i 's|image:.*|image: ${DOCKER_IMAGE}:${DOCKER_TAG}|g' ${K8S_DEPLOYMENT_FILE}
                     """
@@ -55,10 +55,7 @@ pipeline {
     post {
         always {
             script {
-                // Clean up the Docker container if it exists
-                sh "docker rm -f my_container || true"
-
-                // Log out of Docker Hub
+                // Clean up and log out of Docker Hub
                 sh "docker logout"
             }
         }
