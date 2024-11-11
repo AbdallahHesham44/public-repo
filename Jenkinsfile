@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url:'https://github.com/AbdallahHesham44/public-repo.git' ,branch: 'dev'  // Repository URL
+                // Use named parameters for the git step
+                git url: 'https://github.com/AbdallahHesham44/public-repo.git', branch: 'dev'
             }
         }
         stage('Build Docker Image') {
@@ -55,7 +56,7 @@ pipeline {
     post {
         always {
             script {
-                // Clean up and log out of Docker Hub
+                // Log out of Docker Hub
                 sh "docker logout"
             }
         }
