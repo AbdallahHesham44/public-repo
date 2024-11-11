@@ -3,18 +3,19 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/AbdallahHesham44/public-repo.git', branch: 'main' // Replace with your repository URL
+                git url: 'https://github.com/AbdallahHesham44/public-repo.git', branch: 'main'
             }
         }
-       
         stage('Run file') {
             steps {
                 script {
-                    // Run file
+                    // Debugging: List files in workspace
+                    sh 'ls -l'
+                    // Make the script executable and run it
                     sh 'chmod +x app1.sh'
                     sh './app1.sh'
                 }
             }
         }
-    } // Close stages
-} // Close pipeline
+    }
+}
