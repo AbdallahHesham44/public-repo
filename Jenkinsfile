@@ -16,9 +16,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image with a specific tag
-                    sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG} --debug"
-
-                    //sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
@@ -36,6 +34,7 @@ pipeline {
                 }
             }
         }
+    } // Close the stages block
     post {
         always {
             script {
