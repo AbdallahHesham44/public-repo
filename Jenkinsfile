@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'abdallah1312/test'  // Your Docker Hub repository
         DOCKER_TAG = 'latest'
-        K8S_DEPLOYMENT_FILE = 'k8s/deployment.yaml'  // Path to Kubernetes deployment YAML file
+        //K8S_DEPLOYMENT_FILE = 'k8s/deployment.yaml'  // Path to Kubernetes deployment YAML file
     }
     stages {
         stage('Checkout') {
@@ -34,25 +34,6 @@ pipeline {
                 }
             }
         }
-        stage('Update Kubernetes Deployment YAML') {
-            steps {
-                script {
-                    // Update the image name and tag in the Kubernetes deployment YAML file
-                    sh """
-                    sed -i 's|image:.*|image: ${DOCKER_IMAGE}:${DOCKER_TAG}|g' ${K8S_DEPLOYMENT_FILE}
-                    """
-                }
-            }
-        }
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    // Apply the updated Kubernetes deployment YAML to the cluster
-                    sh "kubectl apply -f ${K8S_DEPLOYMENT_FILE}"
-                }
-            }
-        }
-    }
     post {
         always {
             script {
