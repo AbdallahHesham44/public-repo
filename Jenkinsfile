@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/AbdallahHesham44/public-repo.git' ,branch: 'dev'  // Repository URL
+                git url:'https://github.com/AbdallahHesham44/public-repo.git' ,branch: 'dev'  // Repository URL
             }
         }
         stage('Build Docker Image') {
