@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/AbdallahHesham44/public-repo.git'  // Replace with your repository URL
+                git branch: 'main', url: 'https://github.com/AbdallahHesham44/public-repo.git'  // Replace with your repository URL
             }
         }
        
