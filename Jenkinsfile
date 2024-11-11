@@ -7,10 +7,10 @@ pipeline {
             }
         }
        
-               stage('Run file') {
+        stage('Run file') {
             steps {
                 script {
-                    // Run the Docker container
+                    // Run file
                     sh 'chmod +x app1.sh'
                     sh './app1.sh'
                 }
