@@ -11,8 +11,8 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container
-                    chmod +x app1.sh
-                    sh ./app1.sh
+                    sh 'chmod +x app1.sh'
+                    sh './app1.sh'
                 }
             }
         }
