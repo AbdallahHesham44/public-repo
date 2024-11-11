@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git  url: 'https://github.com/AbdallahHesham44/public-repo.git', branch: 'main' // Replace with your repository URL
+                git url: 'https://github.com/AbdallahHesham44/public-repo.git', branch: 'main' // Replace with your repository URL
             }
         }
        
@@ -16,4 +16,5 @@ pipeline {
                 }
             }
         }
-
+    } // Close stages
+} // Close pipeline
